@@ -7,11 +7,13 @@ const router = express.Router();
 
 router.get("/api/all_posts", async (req, res) => {
 
-    const token = req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization.split(' ')[1];//----------
     try {
+        //----------
         const decodedToken = jwt.verify(token, 'your-secret-key');
 
         const userId = decodedToken.user.id;
+        //------------------------
 
         const posts = await Post.find({ author: userId })
             .sort({ created_at: -1 })
@@ -63,7 +65,10 @@ router.get("/api/posts/:id", async (req, res) => {
 
 router.post("/api/posts", async (req, res) => {
     try {
-        const userId = req.user.id; // Extracted from the decoded token
+        //-----------
+        const userId = req.user.id; //extract user id from the token
+        //----------
+
         const { title, description } = req.body;
 
         const user = await User.findById(userId);
@@ -91,7 +96,10 @@ router.post("/api/posts", async (req, res) => {
 
 router.post("/api/like/:id", async (req, res) => {
     try {
-        const userId = req.user.id; // Extracted from the decoded token
+        //-----------
+        const userId = req.user.id; //extract user id from the decoded token
+        //----------
+
         const postId = req.params.id;
 
         const post = await Post.findById(postId);
@@ -112,7 +120,10 @@ router.post("/api/like/:id", async (req, res) => {
 
 router.post("/api/unlike/:id", async (req, res) => {
     try {
-        const userId = req.user.id; // Extracted from the decoded token
+        //-----------
+        const userId = req.user.id; //extract user id from the token
+        //----------
+
         const postId = req.params.id;
 
         const post = await Post.findById(postId);
@@ -133,7 +144,10 @@ router.post("/api/unlike/:id", async (req, res) => {
 
 router.post("/api/comment/:id", async (req, res) => {
     try {
-        const userId = req.user.id; // Extracted from the decoded token
+        //-----------
+        const userId = req.user.id; //extract user id from the token
+        //----------
+        
         const postId = req.params.id;
         const { comment } = req.body;
 
@@ -155,7 +169,10 @@ router.post("/api/comment/:id", async (req, res) => {
 
 router.delete("/api/posts/:id", async (req, res) => {
     try {
-        const userId = req.user.id; // Extracted from the decoded token
+        //-----------
+        const userId = req.user.id; //extract user id from the token
+        //----------
+
         const postId = req.params.id;
 
         const post = await Post.findOneAndDelete({

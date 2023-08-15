@@ -7,7 +7,10 @@ const router = express.Router();
 
 router.get("/user", async (req, res) => {
     try {
+        //-----------
         const userId = req.user.id; //extract user id from the token
+        //----------
+
         const user = await User.findById(userId).populate(
             "followers following"
         );
@@ -44,7 +47,10 @@ router.post('/post', async(req, res)=>{
 
 router.post("/follow/:id", async (req, res) => {
     try {
-        const userId = req.user.id; // Extracted from the decoded token
+        //-----------
+        const userId = req.user.id; //extract user id from the token
+        //----------
+
         const targetUserId = req.params.id;
 
         const user = await User.findById(userId);
@@ -72,7 +78,11 @@ router.post("/follow/:id", async (req, res) => {
 
 router.post("/unfollow/:id", async (req, res) => {
     try {
-        const userId = req.user.id; // Extracted from the decoded token
+        //-----------
+        const userId = req.user.id; //extract user id from the token
+        //----------
+
+
         const targetUserId = req.params.id;
 
         const user = await User.findById(userId);

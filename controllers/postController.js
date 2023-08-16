@@ -72,7 +72,7 @@ exports.likePost = async (req, res) => {
 
 exports.unlikePost = async (req, res) => {
     try {
-        const userId = req.user.userId; // Extracted from the decoded token
+        const userId = req.user.userId; // Extracted from the decoded token  
         const postId = req.params.id;
 
         const post = await Post.findById(postId);

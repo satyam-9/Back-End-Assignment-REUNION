@@ -4,7 +4,7 @@ const User = require("../models/User");
 
 exports.addPost = async (req, res) => {
     try {
-        const userId = req.user.id; // Extracted from the decoded token
+        const userId = req.user.userId; // Extracted from the decoded token
         const { title, description } = req.body;
 
         const user = await User.findById(userId);
@@ -32,7 +32,7 @@ exports.addPost = async (req, res) => {
 
 exports.deletePost = async (req, res) => {
     try {
-        const userId = req.user.id; // Extracted from the decoded token
+        const userId = req.user.userId; // Extracted from the decoded token
         const postId = req.params.id;
 
         const post = await Post.findOneAndDelete({
@@ -51,7 +51,7 @@ exports.deletePost = async (req, res) => {
 
 exports.likePost = async (req, res) => {
     try {
-        const userId = req.user.id; // Extracted from the decoded token
+        const userId = req.user.userId; // Extracted from the decoded token
         const postId = req.params.id;
 
         const post = await Post.findById(postId);
@@ -72,7 +72,7 @@ exports.likePost = async (req, res) => {
 
 exports.unlikePost = async (req, res) => {
     try {
-        const userId = req.user.id; // Extracted from the decoded token
+        const userId = req.user.userId; // Extracted from the decoded token
         const postId = req.params.id;
 
         const post = await Post.findById(postId);
@@ -93,7 +93,7 @@ exports.unlikePost = async (req, res) => {
 
 exports.addComment = async (req, res) => {
     try {
-        const userId = req.user.id; // Extracted from the decoded token
+        const userId = req.user.userId; // Extracted from the decoded token
         const postId = req.params.id;
         const { comment } = req.body;
 
@@ -144,7 +144,7 @@ exports.getPostById = async (req, res) => {
 
 exports.getAllPosts = async (req, res) => {
     try {
-        const userId = req.user.id; // Extracted from the decoded token
+        const userId = req.user.userId; // Extracted from the decoded token
 
         const posts = await Post.find({ author: userId })
             .sort({ created_at: -1 })

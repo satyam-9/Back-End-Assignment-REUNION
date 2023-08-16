@@ -34,7 +34,7 @@ exports.followUser = async (req, res) => {
 
 exports.unfollowUser = async (req, res) => {
     try {
-        const userId = req.user.id; // Extracted from the decoded token
+        const userId = req.user.userId; // Extracted from the decoded token
         const targetUserId = req.params.id;
 
         const user = await User.findById(userId);

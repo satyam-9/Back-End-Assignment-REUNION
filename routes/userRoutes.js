@@ -12,7 +12,7 @@ router.post('/authenticate',UserController.authenticate)
 
 router.get('/user', authMiddleware.authenticateMiddleware, UserController.getUserProfile);
 
-router.post("/register", async (req, res) => {
+router.post("/register", async (req, res) => {  
     const { email, password, name } = req.body;
 
     try {

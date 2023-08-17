@@ -17,7 +17,7 @@ exports.followUser = async (req, res) => {
         }
 
         if (user.following.includes(targetUserId) || targetUserId === userId) {
-            return res.status(400).json({ error: "Cannot follow this user." });
+            return res.status(400).json({ message: "Already following" });
         }
 
         user.following.push(targetUserId);

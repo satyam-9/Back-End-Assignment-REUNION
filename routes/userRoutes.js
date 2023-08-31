@@ -5,7 +5,6 @@ const authMiddleware = require('../middleware/authMiddleware');
 const User = require('../models/User');
 const bcrypt = require('bcrypt')
 
-
 const router = express.Router();
 
 router.post('/authenticate',UserController.authenticate)

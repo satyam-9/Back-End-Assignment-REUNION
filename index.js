@@ -11,7 +11,7 @@ const app = express();
 require("dotenv").config();  
 
 // Connect to MongoDB
-console.log(process.env.MONGODB_URI)
+// console.log(process.env.MONGODB_URI)
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGODB_URI, {
     console.log('Database Connection is ready...')
 })
 .catch((err)=> {
-    console.log(err);
+    console.log(err);  
 }) 
 
 app.use(express.json());

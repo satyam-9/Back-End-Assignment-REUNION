@@ -2,7 +2,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const bcrypt = require('bcrypt')
-// const { generateUserToken } = require("../utils/token");
 
 exports.followUser = async (req, res) => {
     try {
@@ -17,9 +16,8 @@ exports.followUser = async (req, res) => {
         }
 
         if (user.following.includes(targetUserId) || targetUserId === userId) {
-            return res.status(400).json({ message: "Already following" });
+            return res.status(200).json({ message: "Already following" });
         }
-
         user.following.push(targetUserId);
         targetUser.followers.push(userId);
 
@@ -102,7 +100,7 @@ exports.authenticate = async (req, res) => {
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if (!isPasswordValid) {
-            return res.status(401).json({ message: "Authentication failed" });
+            return res.status(401).json({ message: "Authentication failed, Password is invalid" });
         }
         console.log(user.id)
         const token = jwt.sign({ userId: user._id }, "your-secret-key", {
@@ -114,5 +112,15 @@ exports.authenticate = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 };
+
+exports.newAuthenticate = async(req, res)=>{
+    const{email, pass} = req.body;
+
+    try{
+        const user = await User.findOne({email})
+    }catch(err){
+
+    }
+}
 
 // Other user controller functions...
